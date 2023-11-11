@@ -53,6 +53,8 @@
 						} else if (isset($_SESSION["type"]) && $_SESSION['type'] == 'alumni') {
 						?>
 							<li><a class="nav-in" href="job.php"><span data-letters="Jobs">Jobs</span></a></li>
+							<li><a class="nav-in" href="mypost.php"><span data-letters="My Posts">My Posts</span></a></li>
+							
 							<li class="dropdown">
 								<a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">My Account<span class="caret"></span></a>
 								<ul class="dropdown-menu">
