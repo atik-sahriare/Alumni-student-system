@@ -1,62 +1,17 @@
 <?php
 include("sqlcon.php");
-session_start();
 if(isset($_SESSION["type"]))
 {
 	//echo "<script>window.location='index.php';</script>";
-	
 }
-// if(isset($_POST['submit']))
-// {
-// $qry = "update tbluser set membershiptype='".$_POST['membershiptype']."', mfee='".$_POST['membershipfee']."', paytype='".$_POST['paytype']."', bank='".$_POST['bankname']."', cardno='".$_POST['cardno']."', cvv='".$_POST['cvv']."', expmonth='".$_POST['cardexpmonth']."', expyear='".$_POST['year']."', reg_date='".date('Y-m-d')."' where userid=".$_GET['id'];
-// $rs = mysqli_query($con, $qry);
-// if($rs)
-// {
-// 	echo "<script>alert('Renewal Success!!');window.location='login.php';</script>";
-// }else{
-// 	echo"Test";
-
-// }
-
-// }
-if (isset($_POST['submit'])) {
-	
-    $membershiptype = $_POST['membershiptype'];
-	echo '<br>'. $membershiptype;
-    $membershipfee = $_POST['membershipfee'];
-	echo  '<br>'. $membershipfee;
-    $paytype = $_POST['paytype'];
-	echo  '<br>'. $paytype;
-    $bankname = $_POST['bankname'];
-	echo  '<br>'. $bankname;
-    $cardno = $_POST['cardno'];
-	echo '<br>'.  $cardno;
-    $cvv = $_POST['cvv'];
-	echo  '<br>'. $cvv;
-    $cardexpmonth = $_POST['cardexpmonth'];
-	echo  '<br>'. $cardexpmonth;
-    $year = $_POST['year'];
-	echo  '<br>'. $year;
-    $currentDate = date('Y-m-d');
-	echo  '<br>'. $currentDate;
-    $userId = $_SESSION['uid'];
-	echo  '<br>'. $userId;
-
-	// UPDATE table_name SET column1 = value1, column2 = value2, ...WHERE condition;
-
-	// UPDATE tbluser SET membershiptype='Standard', mfee=33, paytype='Debitcard', bank='DBBL', cardno='4556632569652314', cvv=123, expmonth=5, expyear=2025, reg_date='2023-01-03' WHERE userid=23
-	// UPDATE tbluser SET membershiptype='Standard', mfee=33, paytype='Debitcard', bank='DBBL', cardno='4556632569652314', cvv=123, expmonth=5, expyear=2025, reg_date='2023-01-03' WHERE userid=23;
-
-    $qry = "UPDATE tbluser SET membershiptype='$membershiptype', mfee='$membershipfee', paytype='$paytype', bank='$bankname', cardno='$cardno', cvv='$cvv', expmonth='$cardexpmonth', expyear='$year', reg_date='$currentDate' WHERE userid={$_SESSION['uid']}";
-	// var_dump($qry);
-    $stmt = mysqli_query($con, $qry);
-
-
-    if ($stmt) {
-            echo "<script>alert('Renewal Success!!');window.location='index.php';</script>";
-    } else {
-        echo "Error: " . mysqli_error($con);
-    }
+if(isset($_POST['submit']))
+{
+$qry = "update tbluser set membershiptype='".$_POST['membershiptype']."', mfee='".$_POST['membershipfee']."', paytype='".$_POST['paytype']."', bank='".$_POST['bankname']."', cardno='".$_POST['cardno']."', cvv='".$_POST['cvv']."', expmonth='".$_POST['cardexpmonth']."', expyear='".$_POST['year']."', reg_date='".date("Y-m-d")."' where userid=".$_GET['id'];
+$rs = mysqli_query($con, $qry);
+if($rs)
+{
+	echo "<script>alert('Renewal Success!!');window.location='login.php';</script>";
+}
 }
   ?>
 
@@ -209,7 +164,7 @@ include("header.php")
 		 <option value='2018'>2018</option>
 		 <option value='2019'>2019</option>
 		 <option value='2020'>2020</option>
-		 <option value='2025'>2025</option>
+		 <option value='2021'>2021</option>
 		</select>
 		  </div>
         </div>
