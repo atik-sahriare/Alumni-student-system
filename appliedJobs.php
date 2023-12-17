@@ -8,17 +8,13 @@ include("header.php")
  
 <div class="container">
 	<div class="page">
-   <h3>My Posts</h3>
+   <h3>My Application History</h3>
    <?php 
    if(isset($_SESSION["type"]) && $_SESSION['type'] == 'alumni')
    {
      ?>
     <div class="col-md-12">         
-<div class="btn-toolbar list-toolbar" style="text-align:right;">
-    <a href="jobposting.php">
-    <button class="btn btn-primary"><i class="fa fa-plus"></i> Post Job</button></a>
-  <div class="btn-group">
-  </div>
+
 </div> <br/>
 </div>
 <?php
@@ -26,7 +22,7 @@ include("header.php")
      ?>
    
  <?php
-  $res = mysqli_query($con, "Select * from tbljob inner join tbluser on tbljob.alumnid=tbluser.userid where tbljob.status='Active' and tbluser.name = '".$_SESSION["name"]."'");
+  $res = mysqli_query($con, "Select * from tbljob inner join tbljobappln on tbljob.jobid=tbljobappln.jobid Where tbljobappln.candidatename = '".$_SESSION["name"]."'");
   if(mysqli_num_rows($res) >0)
   {
 while($result = mysqli_fetch_array($res))
@@ -36,7 +32,7 @@ while($result = mysqli_fetch_array($res))
 <div class="service-top">
 			<div class="col-md-11 ser-1 animated wow fadeInLeft" data-wow-duration="1000ms" data-wow-delay="500ms">
 				<div class="ser-img">
-					<h6><?php echo $result['jobtitle'];   ?>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">Posted By: <?php echo $result['name'];   ?></span></h6>
+					<h6><?php echo $result['jobtitle'];   ?>&nbsp;&nbsp;&nbsp;&nbsp;<span style="color:blue;">Date: <?php echo $result['applndate'];   ?></span></h6>
 					<a href="deletepost.php?id=<?php echo $result[0]; ?>"><i class="glyphicon glyphicon-cross">Delete</i></a>
 
 					
@@ -59,6 +55,6 @@ while($result = mysqli_fetch_array($res))
   }
   else
   {
-	  echo "<div class='service-top' style='min-height:400px;'><h3 align='center'>You Haven't Posted Yet!!.</h3></div>";
+	  echo "<div class='service-top' style='min-height:400px;'><h3 align='center'>Not Applied Yet!!!</h3></div>";
   }
   ?>	
