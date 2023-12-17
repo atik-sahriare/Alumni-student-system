@@ -4,14 +4,22 @@ if(!isset($_SESSION['type']))
 {
 	//echo "<script>window.location='index.php';</script>";
 }
-if(isset($_GET['id']))
-{
-	$rs = mysqli_query($con,"update tblstaff set status='Active' where staffid=".$_GET['id']);
-	if($rs)
-	{
-		echo "<script>alert('Record updated successfully...!!');window.location='verify_staff.php';</script>";
-	}
+if(isset($_GET['id'])) {
+    // Get the ID from the URL parameter
+    $staffId = $_GET['id'];
+
+    // Create the unique ID by combining "staff" with the retrieved ID
+    $uniqueID = "staff" . $staffId;
+
+    // Update the record with the unique ID
+    $qry = "UPDATE tblstaff SET status='Active', uniqueID='$uniqueID' WHERE staffid=" . $staffId;
+    $rs = mysqli_query($con, $qry);
+
+    if ($rs) {
+        echo "<script>alert('Record updated successfully...!!');window.location='verify_staff.php';</script>";
+    }
 }
+
 if(isset($_GET['did']))
 {
 	$rs = mysqli_query($con,"update tblstaff set status='Disapproved' where staffid=".$_GET['did']);
@@ -29,7 +37,7 @@ include("header.php")
  
 <div class="container">
 	<div class="page">
-   <h3 align='center'>Verify Alumni</h3>
+   <h3 align='center'>Verify Staff</h3>
    <p>&nbsp;</p>
   <div class="bs-example" data-example-id="contextual-table" style="border: 1px solid #eee">
     <table class="table" id="dataTables-example">
@@ -55,22 +63,22 @@ include("header.php")
 		echo "<tr>
 		<td>".$c++."</td>
 		<td>";
-		if(file_exists('upload/staff/'.$row["staffphoto"]))
+		if(file_exists($row["staffphoto"]))
 		{
-		echo "<img src='upload/staff/".$row[staffphoto]."' width='100px' height='100px' alt='$row[1]'/>";
+		echo "<img src='".$row['staffphoto']."' width='100px' height='100px' alt='$row[1]'/>";
 		}
 		else
 		{
 		echo "<img src='images/821no-user-image.png' width='100px' height='100px' alt='$row[1]'/>";
 		}
 		echo "</td>
-		<td>".$row[1]."</td>
-		<td>".$row[2]."</td>
-		<td>".$row[3]."</td>
-		<td>".$row[4]."</td>
-		<td>".$row[5]."</td>
-		<td>".$row[6]."</td>
-		<td>".$row[7]."</td>
+		<td>".$row["staffname"]."</td>
+		<td>".$row["qualification"]."</td>
+		<td>".$row["designation"]."</td>
+		<td>".$row["dateof_join"]."</td>
+		<td>".$row["address"]."</td>
+		<td>".$row["contactno"]."</td>
+		<td>".$row["emailid"]."</td>
 	   
 		<td><a href='verify_staff.php?id=$row[0]' >Approve</a>&nbsp;/&nbsp;<a href='verify_staff.php?did=$row[0]'>Deny</a></td>
 	  </tr>";
